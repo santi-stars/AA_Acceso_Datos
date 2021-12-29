@@ -1,14 +1,20 @@
 package com.example.gestitaller.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity(name = "mecanico")
 public class Mecanico {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
     @Column
     public String nombre;
@@ -20,7 +26,7 @@ public class Mecanico {
     public String dni;
     @Column
     public boolean disponible;
-    @Column
+    @Column(name = "fecha_contratacion")
     public LocalDate fechaContratacion;
 
 }

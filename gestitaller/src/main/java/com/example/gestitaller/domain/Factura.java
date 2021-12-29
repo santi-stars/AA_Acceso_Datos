@@ -1,26 +1,32 @@
 package com.example.gestitaller.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity(name = "factura")
 public class Factura {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
-    @Column
+    @Column(name = "fecha_factura")
     public LocalDate fechaFactura;
-    @Column
+    @Column(name = "id_recambio")
     public long idRecambio;
     @Column
     public int cantidad;
     @Column
     public boolean pagada;
-    @Column
+    @Column(name = "id_cliente")
     public long idCliente;
-    @Column
+    @Column(name = "id_moto")
     public long idMoto;
 
 }
