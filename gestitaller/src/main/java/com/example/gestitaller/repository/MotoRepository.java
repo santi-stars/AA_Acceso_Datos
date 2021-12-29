@@ -1,4 +1,8 @@
 package com.example.gestitaller.repository;
 
-public class MotoRepository {
+import com.example.gestitaller.domain.Moto;
+import org.springframework.data.repository.CrudRepository;
+
+public interface MotoRepository extends CrudRepository<Moto, Long> {
+
 }
