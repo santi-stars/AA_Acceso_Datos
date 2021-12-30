@@ -6,11 +6,15 @@ import java.util.List;
 
 public interface MecanicoService {
 
-    List<Mecanico> findAll();
+    List<Mecanico> findAllMecanicos();
 
     Mecanico findMecanico(long id);
 
     List<Mecanico> findByNombre(String nombre);
 
-    void addMecanico(Mecanico mecanico);
+    Mecanico deleteMecanico(long id);
+
+    Mecanico addMecanico(Mecanico mecanico);
+
+    Mecanico modifyMecanico(long id, Mecanico mecanico);
 }

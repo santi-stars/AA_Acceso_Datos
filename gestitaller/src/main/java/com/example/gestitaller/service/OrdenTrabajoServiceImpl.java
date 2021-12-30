@@ -31,7 +31,27 @@ public class OrdenTrabajoServiceImpl implements OrdenTrabajoService {
     }
 
     @Override
-    public void addOrdenTrabajo(OrdenTrabajo ordenTrabajo) {
-
+    public OrdenTrabajo deleteOrden(long id) {
+        OrdenTrabajo mecanico = ordenTrabajoRepository.findById(id);
+        ordenTrabajoRepository.delete(mecanico);
+        return mecanico;
     }
+
+    @Override
+    public OrdenTrabajo addOrden(OrdenTrabajo ordenTrabajo) {
+        return ordenTrabajoRepository.save(ordenTrabajo);
+    }
+
+    @Override
+    public OrdenTrabajo modifyOrden(long id, OrdenTrabajo newOrdenTrabajo) {
+        OrdenTrabajo ordenTrabajo = ordenTrabajoRepository.findById(id);
+        ordenTrabajo.setEjecutada(newOrdenTrabajo.isEjecutada());
+        ordenTrabajo.setFechaOrden(newOrdenTrabajo.getFechaOrden());
+        ordenTrabajo.setIdMecanico(newOrdenTrabajo.getIdMecanico());
+        ordenTrabajo.setIdFactura(newOrdenTrabajo.getIdFactura());
+        ordenTrabajo.setIdMoto(newOrdenTrabajo.getIdMoto());
+
+        return ordenTrabajoRepository.save(ordenTrabajo);
+    }
+
 }

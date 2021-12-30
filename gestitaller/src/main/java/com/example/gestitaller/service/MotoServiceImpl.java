@@ -1,5 +1,6 @@
 package com.example.gestitaller.service;
 
+import com.example.gestitaller.domain.Cliente;
 import com.example.gestitaller.domain.Mecanico;
 import com.example.gestitaller.domain.Moto;
 import com.example.gestitaller.repository.MecanicoRepository;
@@ -31,7 +32,27 @@ public class MotoServiceImpl implements MotoService {
     }
 
     @Override
-    public void addMoto(Moto moto) {
-
+    public Moto deleteMoto(long id) {
+        Moto moto = motoRepository.findById(id);
+        motoRepository.delete(moto);
+        return moto;
     }
+
+    @Override
+    public Moto addMoto(Moto moto) {
+        return motoRepository.save(moto);
+    }
+
+    @Override
+    public Moto modifyMoto(long id, Moto newMoto) {
+        Moto moto = motoRepository.findById(id);
+        moto.setMarca(newMoto.getMarca());
+        moto.setModelo(newMoto.getModelo());
+        moto.setCilindrada(newMoto.getCilindrada());
+        moto.setFechaMatriculacion(newMoto.getFechaMatriculacion());
+        moto.setIdCliente(newMoto.getIdCliente());
+
+        return motoRepository.save(moto);
+    }
+
 }

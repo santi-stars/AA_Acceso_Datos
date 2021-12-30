@@ -14,7 +14,7 @@ public class MecanicoServiceImpl implements MecanicoService {
     private MecanicoRepository mecanicoRepository;
 
     @Override
-    public List<Mecanico> findAll() {
+    public List<Mecanico> findAllMecanicos() {
         return mecanicoRepository.findAll();
     }
 
@@ -29,7 +29,27 @@ public class MecanicoServiceImpl implements MecanicoService {
     }
 
     @Override
-    public void addMecanico(Mecanico mecanico) {
+    public Mecanico deleteMecanico(long id) {
+        Mecanico mecanico = mecanicoRepository.findById(id);
+        mecanicoRepository.delete(mecanico);
+        return mecanico;
+    }
 
+    @Override
+    public Mecanico addMecanico(Mecanico mecanico) {
+        return mecanicoRepository.save(mecanico);
+    }
+
+    @Override
+    public Mecanico modifyMecanico(long id, Mecanico newMecanico) {
+        Mecanico mecanico = mecanicoRepository.findById(id);
+        mecanico.setNombre(newMecanico.getNombre());
+        mecanico.setApellido(newMecanico.getApellido());
+        mecanico.setEdad(newMecanico.getEdad());
+        mecanico.setDni(newMecanico.getDni());
+        mecanico.setDisponible(newMecanico.isDisponible());
+        mecanico.setFechaContratacion(newMecanico.getFechaContratacion());
+
+        return mecanicoRepository.save(mecanico);
     }
 }

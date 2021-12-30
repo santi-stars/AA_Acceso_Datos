@@ -31,7 +31,28 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public void addCliente(Cliente cliente) {
-
+    public Cliente deleteCliente(long id) {
+        Cliente cliente = clienteRepository.findById(id);
+        clienteRepository.delete(cliente);
+        return cliente;
     }
+
+    @Override
+    public Cliente addCliente(Cliente cliente) {
+        return clienteRepository.save(cliente);
+    }
+
+    @Override
+    public Cliente modifyCliente(long id, Cliente newCliente) {
+        Cliente cliente = clienteRepository.findById(id);
+        cliente.setNombre(newCliente.getNombre());
+        cliente.setApellido(newCliente.getApellido());
+        cliente.setEdad(newCliente.getEdad());
+        cliente.setDni(newCliente.getDni());
+        cliente.setDireccion(newCliente.getDireccion());
+        cliente.setClienteVip(newCliente.isClienteVip());
+
+        return clienteRepository.save(cliente);
+    }
+
 }

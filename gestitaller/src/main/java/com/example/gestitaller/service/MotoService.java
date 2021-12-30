@@ -1,5 +1,6 @@
 package com.example.gestitaller.service;
 
+import com.example.gestitaller.domain.Cliente;
 import com.example.gestitaller.domain.Mecanico;
 import com.example.gestitaller.domain.Moto;
 
@@ -13,5 +14,9 @@ public interface MotoService {
 
     List<Moto> findByMarca(String marca);
 
-    void addMoto(Moto moto);
+    Moto deleteMoto(long id);
+
+    Moto addMoto(Moto moto);
+
+    Moto modifyMoto(long id, Moto moto);
 }

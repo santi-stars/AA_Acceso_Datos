@@ -13,5 +13,9 @@ public interface ClienteService {
 
     List<Cliente> findByNombre(String nombre);
 
-    void addCliente(Cliente cliente);
+    Cliente deleteCliente(long id);
+
+    Cliente addCliente(Cliente cliente);
+
+    Cliente modifyCliente(long id, Cliente cliente);
 }

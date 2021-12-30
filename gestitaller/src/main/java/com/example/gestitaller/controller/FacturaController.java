@@ -5,9 +5,7 @@ import com.example.gestitaller.domain.Factura;
 import com.example.gestitaller.service.ClienteService;
 import com.example.gestitaller.service.FacturaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,15 +21,33 @@ public class FacturaController {
         return facturas;
     }
 
-    @GetMapping("factura/{id}")
+    @GetMapping("/factura/{id}")
     public Factura getById(@PathVariable long id) {
         Factura factura = facturaService.findById(id);
         return factura;
     }
 
-    @GetMapping("facturas/{pagada}")
+    @GetMapping("/facturas/{pagada}")
     public List<Factura> getByPagada(@PathVariable boolean pagada) {
         List<Factura> facturas = facturaService.findByPagada(pagada);
         return facturas;
+    }
+
+    @DeleteMapping("/factura/{id}")
+    public Factura deleteFactura(@PathVariable long id) {
+        Factura factura = facturaService.deleteFactura(id);
+        return factura;
+    }
+
+    @PostMapping("/factura")
+    public Factura addFactura(@RequestBody Factura factura) {
+        Factura newfactura = facturaService.addFactura(factura);
+        return newfactura;
+    }
+
+    @PutMapping("/factura/{id}")
+    public Factura modifyFactura(@RequestBody Factura factura, @PathVariable long id) {
+        Factura newfactura = facturaService.modifyFactura(id, factura);
+        return newfactura;
     }
 }
