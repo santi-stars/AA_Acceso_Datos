@@ -1,17 +1,17 @@
-package com.example.gestitaller.repository;
+package com.example.gestitaller.service;
 
 import com.example.gestitaller.domain.Mecanico;
 import com.example.gestitaller.domain.OrdenTrabajo;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface OrdenTrabajoRepository extends CrudRepository<OrdenTrabajo, Long> {
+public interface OrdenTrabajoService {
+
     List<OrdenTrabajo> findAll();
 
     OrdenTrabajo findById(long id);
 
     List<OrdenTrabajo> findByEjecutada(boolean ejecutada);
+
+    void addOrdenTrabajo(OrdenTrabajo ordenTrabajo);
 }

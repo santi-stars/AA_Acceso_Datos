@@ -27,4 +27,10 @@ public class MecanicoController {
         Mecanico mecanico= mecanicoService.findMecanico(id);
         return mecanico;
     }
+
+    @GetMapping("mecanicos/{nombre}")
+    public List<Mecanico> getMecanico(@PathVariable String nombre){
+        List<Mecanico> mecanicos = mecanicoService.findByNombre(nombre);
+        return mecanicos;
+    }
 }

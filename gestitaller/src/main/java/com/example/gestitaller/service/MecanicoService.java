@@ -10,5 +10,7 @@ public interface MecanicoService {
 
     Mecanico findMecanico(long id);
 
+    List<Mecanico> findByNombre(String nombre);
+
     void addMecanico(Mecanico mecanico);
 }

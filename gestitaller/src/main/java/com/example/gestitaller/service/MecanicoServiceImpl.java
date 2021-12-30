@@ -4,7 +4,6 @@ import com.example.gestitaller.domain.Mecanico;
 import com.example.gestitaller.repository.MecanicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -22,6 +21,11 @@ public class MecanicoServiceImpl implements MecanicoService {
     @Override
     public Mecanico findMecanico(long id) {
         return mecanicoRepository.findById(id);
+    }
+
+    @Override
+    public List<Mecanico> findByNombre(String nombre) {
+        return mecanicoRepository.findByNombre(nombre);
     }
 
     @Override

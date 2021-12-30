@@ -8,7 +8,9 @@ import java.util.List;
 
 @Repository
 public interface MecanicoRepository extends CrudRepository<Mecanico, Long> {
-    List<Mecanico>findAll();
+    List<Mecanico> findAll();
+
     Mecanico findById(long id);
-    List<Mecanico>findByNombre(String nombre);
+
+    List<Mecanico> findByNombre(String nombre);
 }

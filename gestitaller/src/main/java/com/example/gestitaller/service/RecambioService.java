@@ -1,17 +1,17 @@
-package com.example.gestitaller.repository;
+package com.example.gestitaller.service;
 
 import com.example.gestitaller.domain.Mecanico;
 import com.example.gestitaller.domain.Recambio;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface RecambioRepository extends CrudRepository<Recambio, Long> {
+public interface RecambioService {
+
     List<Recambio> findAll();
 
     Recambio findById(long id);
 
     List<Recambio> findByCantidadStock(int cantidadStock);
+
+    void addRecambio(Recambio recambio);
 }
