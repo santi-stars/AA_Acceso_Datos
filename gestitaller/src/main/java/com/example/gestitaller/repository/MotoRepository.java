@@ -11,7 +11,5 @@ import java.util.List;
 public interface MotoRepository extends CrudRepository<Moto, Long> {
     List<Moto> findAll();
 
-    Moto findById(long id);
-
     List<Moto> findByMarca(String marca);
 }

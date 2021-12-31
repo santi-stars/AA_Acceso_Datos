@@ -11,7 +11,7 @@ import java.util.List;
 public interface ClienteRepository extends CrudRepository<Cliente, Long> {
     List<Cliente> findAll();
 
-    Cliente findById(long id);
-
     List<Cliente> findByNombre(String nombre);
+
+    List<Cliente> findByNombreOrApellidoOrDni(String nombre, String apellido, String dni);
 }

@@ -3,6 +3,7 @@ package com.example.gestitaller.service;
 import com.example.gestitaller.domain.Cliente;
 import com.example.gestitaller.domain.Mecanico;
 import com.example.gestitaller.domain.Moto;
+import com.example.gestitaller.exception.MotoNotFoundException;
 import com.example.gestitaller.repository.MecanicoRepository;
 import com.example.gestitaller.repository.MotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class MotoServiceImpl implements MotoService {
     }
 
     @Override
-    public Moto findById(long id) {
-        return motoRepository.findById(id);
+    public Moto findById(long id) throws MotoNotFoundException {
+        return motoRepository.findById(id).orElseThrow(MotoNotFoundException::new);
     }
 
     @Override
@@ -32,8 +33,8 @@ public class MotoServiceImpl implements MotoService {
     }
 
     @Override
-    public Moto deleteMoto(long id) {
-        Moto moto = motoRepository.findById(id);
+    public Moto deleteMoto(long id) throws MotoNotFoundException {
+        Moto moto = motoRepository.findById(id).orElseThrow(MotoNotFoundException::new);
         motoRepository.delete(moto);
         return moto;
     }
@@ -44,8 +45,8 @@ public class MotoServiceImpl implements MotoService {
     }
 
     @Override
-    public Moto modifyMoto(long id, Moto newMoto) {
-        Moto moto = motoRepository.findById(id);
+    public Moto modifyMoto(long id, Moto newMoto) throws MotoNotFoundException {
+        Moto moto = motoRepository.findById(id).orElseThrow(MotoNotFoundException::new);
         moto.setMarca(newMoto.getMarca());
         moto.setModelo(newMoto.getModelo());
         moto.setCilindrada(newMoto.getCilindrada());

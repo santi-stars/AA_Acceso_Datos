@@ -1,6 +1,7 @@
 package com.example.gestitaller.service;
 
 import com.example.gestitaller.domain.Mecanico;
+import com.example.gestitaller.exception.MecanicoNotFoundException;
 import com.example.gestitaller.repository.MecanicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,8 @@ public class MecanicoServiceImpl implements MecanicoService {
     }
 
     @Override
-    public Mecanico findMecanico(long id) {
-        return mecanicoRepository.findById(id);
+    public Mecanico findMecanico(long id) throws MecanicoNotFoundException {
+        return mecanicoRepository.findById(id).orElseThrow(MecanicoNotFoundException::new);
     }
 
     @Override
@@ -29,8 +30,8 @@ public class MecanicoServiceImpl implements MecanicoService {
     }
 
     @Override
-    public Mecanico deleteMecanico(long id) {
-        Mecanico mecanico = mecanicoRepository.findById(id);
+    public Mecanico deleteMecanico(long id) throws MecanicoNotFoundException {
+        Mecanico mecanico = mecanicoRepository.findById(id).orElseThrow(MecanicoNotFoundException::new);
         mecanicoRepository.delete(mecanico);
         return mecanico;
     }
@@ -41,8 +42,8 @@ public class MecanicoServiceImpl implements MecanicoService {
     }
 
     @Override
-    public Mecanico modifyMecanico(long id, Mecanico newMecanico) {
-        Mecanico mecanico = mecanicoRepository.findById(id);
+    public Mecanico modifyMecanico(long id, Mecanico newMecanico) throws MecanicoNotFoundException {
+        Mecanico mecanico = mecanicoRepository.findById(id).orElseThrow(MecanicoNotFoundException::new);
         mecanico.setNombre(newMecanico.getNombre());
         mecanico.setApellido(newMecanico.getApellido());
         mecanico.setEdad(newMecanico.getEdad());

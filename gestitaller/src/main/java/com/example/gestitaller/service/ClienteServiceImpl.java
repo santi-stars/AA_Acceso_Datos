@@ -1,9 +1,8 @@
 package com.example.gestitaller.service;
 
 import com.example.gestitaller.domain.Cliente;
-import com.example.gestitaller.domain.Mecanico;
+import com.example.gestitaller.exception.ClienteNotFoundException;
 import com.example.gestitaller.repository.ClienteRepository;
-import com.example.gestitaller.repository.MecanicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +15,18 @@ public class ClienteServiceImpl implements ClienteService {
     private ClienteRepository clienteRepository;
 
     @Override
-    public List<Cliente> findAll() {
+    public List<Cliente> findAllClientes() {
         return clienteRepository.findAll();
     }
 
     @Override
-    public Cliente findById(long id) {
-        return clienteRepository.findById(id);
+    public List<Cliente> findAllClientes(String nombre, String apellido, String dni) {
+        return clienteRepository.findByNombreOrApellidoOrDni(nombre, apellido, dni);
+    }
+
+    @Override
+    public Cliente findById(long id) throws ClienteNotFoundException {
+        return clienteRepository.findById(id).orElseThrow(ClienteNotFoundException::new);
     }
 
     @Override
@@ -31,8 +35,8 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Cliente deleteCliente(long id) {
-        Cliente cliente = clienteRepository.findById(id);
+    public Cliente deleteCliente(long id) throws ClienteNotFoundException {
+        Cliente cliente = clienteRepository.findById(id).orElseThrow(ClienteNotFoundException::new);
         clienteRepository.delete(cliente);
         return cliente;
     }
@@ -43,8 +47,8 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Cliente modifyCliente(long id, Cliente newCliente) {
-        Cliente cliente = clienteRepository.findById(id);
+    public Cliente modifyCliente(long id, Cliente newCliente) throws ClienteNotFoundException {
+        Cliente cliente = clienteRepository.findById(id).orElseThrow(ClienteNotFoundException::new);
         cliente.setNombre(newCliente.getNombre());
         cliente.setApellido(newCliente.getApellido());
         cliente.setEdad(newCliente.getEdad());

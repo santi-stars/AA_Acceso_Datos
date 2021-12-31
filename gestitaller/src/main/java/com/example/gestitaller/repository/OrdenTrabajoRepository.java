@@ -11,7 +11,5 @@ import java.util.List;
 public interface OrdenTrabajoRepository extends CrudRepository<OrdenTrabajo, Long> {
     List<OrdenTrabajo> findAll();
 
-    OrdenTrabajo findById(long id);
-
     List<OrdenTrabajo> findByEjecutada(boolean ejecutada);
 }

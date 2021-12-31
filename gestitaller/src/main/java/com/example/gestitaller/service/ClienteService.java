@@ -2,20 +2,23 @@ package com.example.gestitaller.service;
 
 import com.example.gestitaller.domain.Cliente;
 import com.example.gestitaller.domain.Mecanico;
+import com.example.gestitaller.exception.ClienteNotFoundException;
 
 import java.util.List;
 
 public interface ClienteService {
 
-    List<Cliente> findAll();
+    List<Cliente> findAllClientes();
 
-    Cliente findById(long id);
+    List<Cliente> findAllClientes(String nombre, String apellido, String dni);
 
-    List<Cliente> findByNombre(String nombre);
+    Cliente findById(long id) throws ClienteNotFoundException;
 
-    Cliente deleteCliente(long id);
+    List<Cliente> findByNombre(String nombre) throws ClienteNotFoundException;
+
+    Cliente deleteCliente(long id) throws ClienteNotFoundException;
 
     Cliente addCliente(Cliente cliente);
 
-    Cliente modifyCliente(long id, Cliente cliente);
+    Cliente modifyCliente(long id, Cliente cliente) throws ClienteNotFoundException;
 }

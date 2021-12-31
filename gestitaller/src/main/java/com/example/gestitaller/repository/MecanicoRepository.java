@@ -10,7 +10,5 @@ import java.util.List;
 public interface MecanicoRepository extends CrudRepository<Mecanico, Long> {
     List<Mecanico> findAll();
 
-    Mecanico findById(long id);
-
     List<Mecanico> findByNombre(String nombre);
 }

@@ -1,10 +1,14 @@
 package com.example.gestitaller.controller;
 
-import com.example.gestitaller.domain.Cliente;
 import com.example.gestitaller.domain.Factura;
-import com.example.gestitaller.service.ClienteService;
+import com.example.gestitaller.exception.ErrorResponse;
+import com.example.gestitaller.exception.FacturaNotFoundException;
 import com.example.gestitaller.service.FacturaService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,39 +19,66 @@ public class FacturaController {
     @Autowired
     private FacturaService facturaService;
 
+    private final Logger logger = LoggerFactory.getLogger(FacturaController.class);
+
     @GetMapping("/facturas")
     public List<Factura> getFacturas() {
+        logger.info("Inicio getFacturas");
         List<Factura> facturas = facturaService.findAll();
+        logger.info("Fin getFacturas");
         return facturas;
     }
 
     @GetMapping("/factura/{id}")
-    public Factura getById(@PathVariable long id) {
+    public Factura getById(@PathVariable long id) throws FacturaNotFoundException {
+        logger.info("Inicio getById " + id);
         Factura factura = facturaService.findById(id);
+        logger.info("Fin getById " + id);
         return factura;
     }
 
     @GetMapping("/facturas/{pagada}")
-    public List<Factura> getByPagada(@PathVariable boolean pagada) {
+    public List<Factura> getByPagada(@PathVariable boolean pagada) throws FacturaNotFoundException {
+        logger.info("Inicio getByPagada " + pagada);
         List<Factura> facturas = facturaService.findByPagada(pagada);
+        logger.info("Fin getByPagada " + pagada);
         return facturas;
     }
 
     @DeleteMapping("/factura/{id}")
-    public Factura deleteFactura(@PathVariable long id) {
+    public Factura deleteFactura(@PathVariable long id) throws FacturaNotFoundException {
+        logger.info("Inicio deleteFactura " + id);
         Factura factura = facturaService.deleteFactura(id);
+        logger.info("Fin deleteFactura " + id);
         return factura;
     }
 
     @PostMapping("/factura")
-    public Factura addFactura(@RequestBody Factura factura) {
+    public Factura addFactura(@RequestBody Factura factura) throws FacturaNotFoundException {
+        logger.info("Inicio addFactura");
         Factura newfactura = facturaService.addFactura(factura);
+        logger.info("Fin addFactura");
         return newfactura;
     }
 
     @PutMapping("/factura/{id}")
-    public Factura modifyFactura(@RequestBody Factura factura, @PathVariable long id) {
+    public Factura modifyFactura(@RequestBody Factura factura, @PathVariable long id) throws FacturaNotFoundException {
+        logger.info("Inicio modifyFactura " + id);
         Factura newfactura = facturaService.modifyFactura(id, factura);
+        logger.info("Fin modifyFactura " + id);
         return newfactura;
+    }
+
+    @ExceptionHandler(FacturaNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleBikeNotFoundException(FacturaNotFoundException fnfe) {
+        ErrorResponse errorResponse = new ErrorResponse("404", fnfe.getMessage());
+        logger.info(fnfe.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(FacturaNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleException(Exception exception) {
+        ErrorResponse errorResponse = new ErrorResponse("999", "Internal server error");
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

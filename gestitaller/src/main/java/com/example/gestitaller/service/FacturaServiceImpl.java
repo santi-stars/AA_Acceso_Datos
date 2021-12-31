@@ -3,6 +3,7 @@ package com.example.gestitaller.service;
 import com.example.gestitaller.domain.Cliente;
 import com.example.gestitaller.domain.Factura;
 import com.example.gestitaller.domain.Mecanico;
+import com.example.gestitaller.exception.FacturaNotFoundException;
 import com.example.gestitaller.repository.FacturaRepository;
 import com.example.gestitaller.repository.MecanicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class FacturaServiceImpl implements FacturaService {
     }
 
     @Override
-    public Factura findById(long id) {
-        return facturaRepository.findById(id);
+    public Factura findById(long id) throws FacturaNotFoundException {
+        return facturaRepository.findById(id).orElseThrow(FacturaNotFoundException::new);
     }
 
     @Override
@@ -32,8 +33,8 @@ public class FacturaServiceImpl implements FacturaService {
     }
 
     @Override
-    public Factura deleteFactura(long id) {
-        Factura factura = facturaRepository.findById(id);
+    public Factura deleteFactura(long id) throws FacturaNotFoundException {
+        Factura factura = facturaRepository.findById(id).orElseThrow(FacturaNotFoundException::new);
         facturaRepository.delete(factura);
         return factura;
     }
@@ -44,8 +45,8 @@ public class FacturaServiceImpl implements FacturaService {
     }
 
     @Override
-    public Factura modifyFactura(long id, Factura newFactura) {
-        Factura factura = facturaRepository.findById(id);
+    public Factura modifyFactura(long id, Factura newFactura) throws FacturaNotFoundException {
+        Factura factura = facturaRepository.findById(id).orElseThrow(FacturaNotFoundException::new);
         factura.setFechaFactura(newFactura.getFechaFactura());
         factura.setIdRecambio(newFactura.getIdRecambio());
         factura.setCantidad(newFactura.getCantidad());

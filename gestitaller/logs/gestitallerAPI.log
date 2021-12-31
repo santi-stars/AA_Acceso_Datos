@@ -1,0 +1,37 @@
+2021-12-31 14:17:24,434 INFO org.springframework.boot.StartupInfoLogger [main] Starting GestitallerApplication using Java 11.0.13 on DESKTOP-T0BDM2U with PID 17480 (C:\Users\santi\IdeaProjects\AD-AA\gestitaller\target\classes started by santi in C:\Users\santi\IdeaProjects\AD-AA\gestitaller)
+2021-12-31 14:17:24,450 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2021-12-31 14:17:25,368 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-12-31 14:17:25,468 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 86 ms. Found 6 JPA repository interfaces.
+2021-12-31 14:17:26,323 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8081 (http)
+2021-12-31 14:17:26,339 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8081"]
+2021-12-31 14:17:26,339 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2021-12-31 14:17:26,339 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.56]
+2021-12-31 14:17:26,455 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2021-12-31 14:17:26,455 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1936 ms
+2021-12-31 14:17:26,493 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2021-12-31 14:17:26,655 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2021-12-31 14:17:26,671 INFO org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration [main] H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./Users/santi/IdeaProjects/H2/gestitaller.db'
+2021-12-31 14:17:26,878 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-12-31 14:17:26,941 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.6.3.Final
+2021-12-31 14:17:27,079 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-12-31 14:17:27,194 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-12-31 14:17:27,881 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-12-31 14:17:27,896 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-12-31 14:17:28,360 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-12-31 14:17:28,683 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8081"]
+2021-12-31 14:17:28,714 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8081 (http) with context path ''
+2021-12-31 14:17:28,730 INFO org.springframework.boot.StartupInfoLogger [main] Started GestitallerApplication in 5.028 seconds (JVM running for 5.604)
+2021-12-31 14:18:33,808 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8081-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-12-31 14:18:33,809 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8081-exec-2] Initializing Servlet 'dispatcherServlet'
+2021-12-31 14:18:33,811 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8081-exec-2] Completed initialization in 2 ms
+2021-12-31 14:18:33,863 INFO com.example.gestitaller.controller.ClienteController [http-nio-8081-exec-2] Inicio getClientes
+2021-12-31 14:18:33,864 INFO com.example.gestitaller.controller.ClienteController [http-nio-8081-exec-2] Mostrado de todos los clientes
+2021-12-31 14:18:34,046 INFO com.example.gestitaller.controller.ClienteController [http-nio-8081-exec-2] Fin getClientes
+2021-12-31 14:18:38,777 INFO com.example.gestitaller.controller.ClienteController [http-nio-8081-exec-3] Inicio getClientes
+2021-12-31 14:18:38,778 INFO com.example.gestitaller.controller.ClienteController [http-nio-8081-exec-3] Filtrado por nombre, apellido o dni
+2021-12-31 14:18:38,811 INFO com.example.gestitaller.controller.ClienteController [http-nio-8081-exec-3] Fin getClientes
+2021-12-31 14:18:41,395 INFO com.example.gestitaller.controller.ClienteController [http-nio-8081-exec-4] Inicio getClientes
+2021-12-31 14:18:41,396 INFO com.example.gestitaller.controller.ClienteController [http-nio-8081-exec-4] Filtrado por nombre, apellido o dni
+2021-12-31 14:18:41,406 INFO com.example.gestitaller.controller.ClienteController [http-nio-8081-exec-4] Fin getClientes
+2021-12-31 14:19:33,384 INFO com.example.gestitaller.controller.ClienteController [http-nio-8081-exec-6] Inicio getById1
+2021-12-31 14:19:33,401 INFO com.example.gestitaller.controller.ClienteController [http-nio-8081-exec-6] Fin getById1

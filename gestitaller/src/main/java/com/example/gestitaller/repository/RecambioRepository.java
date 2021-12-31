@@ -11,7 +11,5 @@ import java.util.List;
 public interface RecambioRepository extends CrudRepository<Recambio, Long> {
     List<Recambio> findAll();
 
-    Recambio findById(long id);
-
     List<Recambio> findByCantidadStock(int cantidadStock);
 }
