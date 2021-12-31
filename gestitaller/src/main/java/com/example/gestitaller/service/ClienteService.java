@@ -1,7 +1,6 @@
 package com.example.gestitaller.service;
 
 import com.example.gestitaller.domain.Cliente;
-import com.example.gestitaller.domain.Mecanico;
 import com.example.gestitaller.exception.ClienteNotFoundException;
 
 import java.util.List;

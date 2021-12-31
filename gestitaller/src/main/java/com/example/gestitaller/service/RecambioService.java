@@ -1,7 +1,5 @@
 package com.example.gestitaller.service;
 
-import com.example.gestitaller.domain.Mecanico;
-import com.example.gestitaller.domain.OrdenTrabajo;
 import com.example.gestitaller.domain.Recambio;
 import com.example.gestitaller.exception.RecambioNotFoundException;
 

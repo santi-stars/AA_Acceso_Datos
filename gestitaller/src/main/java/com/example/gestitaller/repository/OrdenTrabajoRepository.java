@@ -1,6 +1,5 @@
 package com.example.gestitaller.repository;
 
-import com.example.gestitaller.domain.Mecanico;
 import com.example.gestitaller.domain.OrdenTrabajo;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

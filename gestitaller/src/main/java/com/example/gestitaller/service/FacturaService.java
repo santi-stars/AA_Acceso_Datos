@@ -1,8 +1,6 @@
 package com.example.gestitaller.service;
 
-import com.example.gestitaller.domain.Cliente;
 import com.example.gestitaller.domain.Factura;
-import com.example.gestitaller.domain.Mecanico;
 import com.example.gestitaller.exception.FacturaNotFoundException;
 
 import java.util.List;

@@ -1,9 +1,7 @@
 package com.example.gestitaller.service;
 
-import com.example.gestitaller.domain.Mecanico;
 import com.example.gestitaller.domain.OrdenTrabajo;
 import com.example.gestitaller.exception.OrdenNotFoundException;
-import com.example.gestitaller.repository.MecanicoRepository;
 import com.example.gestitaller.repository.OrdenTrabajoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

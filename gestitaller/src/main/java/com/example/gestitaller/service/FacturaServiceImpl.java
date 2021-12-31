@@ -1,11 +1,8 @@
 package com.example.gestitaller.service;
 
-import com.example.gestitaller.domain.Cliente;
 import com.example.gestitaller.domain.Factura;
-import com.example.gestitaller.domain.Mecanico;
 import com.example.gestitaller.exception.FacturaNotFoundException;
 import com.example.gestitaller.repository.FacturaRepository;
-import com.example.gestitaller.repository.MecanicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
