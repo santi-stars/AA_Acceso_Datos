@@ -21,44 +21,59 @@ public class MecanicoController {
 
     private final Logger logger = LoggerFactory.getLogger(MecanicoController.class);
 
-    @GetMapping("/mecanicos")   //http://localhost:8081/mecanicos?nombre=Santi
+    @GetMapping("/mecanicos")
     public List<Mecanico> getMecanicos(@RequestParam(value = "nombre", defaultValue = "0") String nombre) throws MecanicoNotFoundException {
+        logger.info("Inicio getMecanicos");
         List<Mecanico> mecanicos;
 
         if (nombre.equals("0")) {
+            logger.info("Mostrado de todos los mecanicos");
+            logger.info("Fin getMecanicos");
             return mecanicos = mecanicoService.findAllMecanicos();
         } else {
+            logger.info("Filtrado por nombre de mecanico: " + nombre);
+            logger.info("Fin getMecanicos");
             return mecanicos = mecanicoService.findByNombre(nombre);
         }
     }
 
     @GetMapping("/mecanico/{id}")
     public Mecanico getMecanico(@PathVariable long id) throws MecanicoNotFoundException {
+        logger.info("Inicio getMecanico " + id);
         Mecanico mecanico = mecanicoService.findMecanico(id);
+        logger.info("Fin getMecanico " + id);
         return mecanico;
     }
 
     @GetMapping("/mecanicos/{nombre}")
     public List<Mecanico> getMecanico(@PathVariable String nombre) throws MecanicoNotFoundException {
+        logger.info("Inicio getMecanico " + nombre);
         List<Mecanico> mecanicos = mecanicoService.findByNombre(nombre);
+        logger.info("Fin getMecanico " + nombre);
         return mecanicos;
     }
 
     @DeleteMapping("/mecanico/{id}")
     public Mecanico deleteMecanico(@PathVariable long id) throws MecanicoNotFoundException {
+        logger.info("Inicio deleteMecanico " + id);
         Mecanico mecanico = mecanicoService.deleteMecanico(id);
+        logger.info("Fin deleteMecanico " + id);
         return mecanico;
     }
 
     @PostMapping("/mecanico")
     public Mecanico addMecanico(@RequestBody Mecanico mecanico) {
+        logger.info("Inicio addMecanico");
         Mecanico newMecanico = mecanicoService.addMecanico(mecanico);
+        logger.info("Fin addMecanico");
         return newMecanico;
     }
 
     @PutMapping("/mecanico/{id}")
     public Mecanico modifyMecanico(@RequestBody Mecanico mecanico, @PathVariable long id) throws MecanicoNotFoundException {
+        logger.info("Inicio modifyMecanico " + id);
         Mecanico newMecanico = mecanicoService.modifyMecanico(id, mecanico);
+        logger.info("Fin modifyMecanico " + id);
         return newMecanico;
     }
 

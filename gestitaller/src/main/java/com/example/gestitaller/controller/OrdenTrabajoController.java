@@ -1,13 +1,8 @@
 package com.example.gestitaller.controller;
 
-import com.example.gestitaller.domain.Cliente;
-import com.example.gestitaller.domain.Moto;
 import com.example.gestitaller.domain.OrdenTrabajo;
-import com.example.gestitaller.exception.ClienteNotFoundException;
 import com.example.gestitaller.exception.ErrorResponse;
 import com.example.gestitaller.exception.OrdenNotFoundException;
-import com.example.gestitaller.repository.OrdenTrabajoRepository;
-import com.example.gestitaller.service.ClienteService;
 import com.example.gestitaller.service.OrdenTrabajoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,37 +23,49 @@ public class OrdenTrabajoController {
 
     @GetMapping("/ordenes")
     public List<OrdenTrabajo> getOrdenes() {
+        logger.info("Inicio getOrdenes");
         List<OrdenTrabajo> ordenes = ordenTrabajoService.findAll();
+        logger.info("Fin getOrdenes");
         return ordenes;
     }
 
     @GetMapping("/orden/{id}")
     public OrdenTrabajo getById(@PathVariable long id) throws OrdenNotFoundException {
+        logger.info("Inicio getById " + id);
         OrdenTrabajo orden = ordenTrabajoService.findById(id);
+        logger.info("Fin getById " + id);
         return orden;
     }
 
     @GetMapping("/ordenes/{ejecutada}")
     public List<OrdenTrabajo> getByEjecutada(@PathVariable boolean ejecutada) throws OrdenNotFoundException {
+        logger.info("Inicio getByEjecutada " + ejecutada);
         List<OrdenTrabajo> ordenes = ordenTrabajoService.findByEjecutada(ejecutada);
+        logger.info("Fin getByEjecutada " + ejecutada);
         return ordenes;
     }
 
     @DeleteMapping("/orden/{id}")
     public OrdenTrabajo deleteOrden(@PathVariable long id) throws OrdenNotFoundException {
+        logger.info("Inicio deleteOrden " + id);
         OrdenTrabajo orden = ordenTrabajoService.deleteOrden(id);
+        logger.info("Fin deleteOrden " + id);
         return orden;
     }
 
     @PostMapping("/orden")
     public OrdenTrabajo addOrden(@RequestBody OrdenTrabajo orden) {
+        logger.info("Inicio addOrden");
         OrdenTrabajo newOrden = ordenTrabajoService.addOrden(orden);
+        logger.info("Fin addOrden");
         return newOrden;
     }
 
     @PutMapping("/orden/{id}")
     public OrdenTrabajo modifyOrden(@RequestBody OrdenTrabajo orden, @PathVariable long id) throws OrdenNotFoundException {
+        logger.info("Inicio modifyOrden " + id);
         OrdenTrabajo newOrden = ordenTrabajoService.modifyOrden(id, orden);
+        logger.info("Fin modifyOrden " + id);
         return newOrden;
     }
 

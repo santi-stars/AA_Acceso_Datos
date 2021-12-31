@@ -1,12 +1,8 @@
 package com.example.gestitaller.controller;
 
-import com.example.gestitaller.domain.Cliente;
-import com.example.gestitaller.domain.OrdenTrabajo;
 import com.example.gestitaller.domain.Recambio;
-import com.example.gestitaller.exception.ClienteNotFoundException;
 import com.example.gestitaller.exception.ErrorResponse;
 import com.example.gestitaller.exception.RecambioNotFoundException;
-import com.example.gestitaller.service.ClienteService;
 import com.example.gestitaller.service.RecambioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,37 +23,49 @@ public class RecambioController {
 
     @GetMapping("/recambios")
     public List<Recambio> getRecambios() {
+        logger.info("Inicio getRecambios");
         List<Recambio> recambios = recambioService.findAll();
+        logger.info("Fin getRecambios");
         return recambios;
     }
 
     @GetMapping("/recambio/{id}")
     public Recambio getById(@PathVariable long id) throws RecambioNotFoundException {
+        logger.info("Inicio getById " + id);
         Recambio recambio = recambioService.findById(id);
+        logger.info("Fin getById " + id);
         return recambio;
     }
 
     @GetMapping("/recambios/{cantidad}")
     public List<Recambio> getByCantidadStock(@PathVariable int cantidad) throws RecambioNotFoundException {
+        logger.info("Inicio getByCantidadStock " + cantidad);
         List<Recambio> recambios = recambioService.findByCantidadStock(cantidad);
+        logger.info("Fin getByCantidadStock " + cantidad);
         return recambios;
     }
 
     @DeleteMapping("/recambio/{id}")
-    public Recambio deleteOrden(@PathVariable long id) throws RecambioNotFoundException {
+    public Recambio deleteRecambio(@PathVariable long id) throws RecambioNotFoundException {
+        logger.info("Inicio deleteRecambio " + id);
         Recambio recambio = recambioService.deleteRecambio(id);
+        logger.info("Fin deleteRecambio " + id);
         return recambio;
     }
 
     @PostMapping("/recambio")
-    public Recambio addOrden(@RequestBody Recambio recambio) {
+    public Recambio addRecambio(@RequestBody Recambio recambio) {
+        logger.info("Inicio addRecambio");
         Recambio newRecambio = recambioService.addRecambio(recambio);
+        logger.info("Fin addRecambio");
         return newRecambio;
     }
 
     @PutMapping("/recambio/{id}")
-    public Recambio modifyOrden(@RequestBody Recambio recambio, @PathVariable long id) throws RecambioNotFoundException {
+    public Recambio modifyRecambio(@RequestBody Recambio recambio, @PathVariable long id) throws RecambioNotFoundException {
+        logger.info("Inicio modifyRecambio " + id);
         Recambio newRecambio = recambioService.modifyRecambio(id, recambio);
+        logger.info("Fin modifyRecambio " + id);
         return newRecambio;
     }
 

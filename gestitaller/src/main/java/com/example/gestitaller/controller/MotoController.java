@@ -1,11 +1,8 @@
 package com.example.gestitaller.controller;
 
-import com.example.gestitaller.domain.Cliente;
 import com.example.gestitaller.domain.Moto;
-import com.example.gestitaller.exception.ClienteNotFoundException;
 import com.example.gestitaller.exception.ErrorResponse;
 import com.example.gestitaller.exception.MotoNotFoundException;
-import com.example.gestitaller.service.ClienteService;
 import com.example.gestitaller.service.MotoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,37 +23,49 @@ public class MotoController {
 
     @GetMapping("/motos")
     public List<Moto> getMotos() {
+        logger.info("Inicio getMotos");
         List<Moto> motos = motoService.findAll();
+        logger.info("Fin getMotos");
         return motos;
     }
 
     @GetMapping("/moto/{id}")
     public Moto getById(@PathVariable long id) throws MotoNotFoundException {
+        logger.info("Inicio getById " + id);
         Moto moto = motoService.findById(id);
+        logger.info("Fin getById " + id);
         return moto;
     }
 
     @GetMapping("/motos/{marca}")
     public List<Moto> getByMarca(@PathVariable String marca) throws MotoNotFoundException {
+        logger.info("Inicio getByMarca " + marca);
         List<Moto> motos = motoService.findByMarca(marca);
+        logger.info("Fin getByMarca " + marca);
         return motos;
     }
 
     @DeleteMapping("/moto/{id}")
     public Moto deleteMoto(@PathVariable long id) throws MotoNotFoundException {
+        logger.info("Inicio deleteMoto " + id);
         Moto moto = motoService.deleteMoto(id);
+        logger.info("Fin deleteMoto " + id);
         return moto;
     }
 
     @PostMapping("/moto")
     public Moto addMoto(@RequestBody Moto moto) {
+        logger.info("Inicio addMoto");
         Moto newMoto = motoService.addMoto(moto);
+        logger.info("Fin addMoto");
         return newMoto;
     }
 
     @PutMapping("/moto/{id}")
     public Moto modifyMoto(@RequestBody Moto moto, @PathVariable long id) throws MotoNotFoundException {
+        logger.info("Inicio modifyMoto " + id);
         Moto newMoto = motoService.modifyMoto(id, moto);
+        logger.info("Fin modifyMoto " + id);
         return newMoto;
     }
 
