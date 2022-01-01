@@ -1,8 +1,10 @@
 package com.example.gestitaller.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,17 +18,22 @@ public class Factura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
-    @Column(name = "fecha_factura")
-    public LocalDate fechaFactura;
-    @Column(name = "id_recambio")
-    public long idRecambio;
     @Column
     public int cantidad;
+    @Column(name = "fecha_factura")
+    public LocalDate fechaFactura;
+    @ManyToOne
+    @JoinColumn(name = "id_recambio")
+    public Recambio recambio;
     @Column
     public boolean pagada;
-    @Column(name = "id_cliente")
-    public long idCliente;
-    @Column(name = "id_moto")
-    public long idMoto;
-
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    public Cliente cliente;
+    @ManyToOne
+    @JoinColumn(name = "id_moto")
+    public Moto moto;
+    @ManyToOne
+    @JoinColumn(name = "id_orden")
+    public OrdenTrabajo ordenTrabajo;
 }

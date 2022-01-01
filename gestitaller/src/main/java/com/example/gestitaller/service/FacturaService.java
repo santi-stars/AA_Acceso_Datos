@@ -1,7 +1,9 @@
 package com.example.gestitaller.service;
 
+import com.example.gestitaller.domain.Cliente;
 import com.example.gestitaller.domain.Factura;
-import com.example.gestitaller.exception.FacturaNotFoundException;
+import com.example.gestitaller.domain.dto.FacturaDTO;
+import com.example.gestitaller.exception.*;
 
 import java.util.List;
 
@@ -15,7 +17,13 @@ public interface FacturaService {
 
     Factura deleteFactura(long id) throws FacturaNotFoundException;
 
-    Factura addFactura(Factura factura);
+    Factura addFactura(FacturaDTO newFacturaDTO) throws
+            RecambioNotFoundException, ClienteNotFoundException, MotoNotFoundException, OrdenNotFoundException;
 
-    Factura modifyFactura(long id, Factura factura) throws FacturaNotFoundException;
+    Factura modifyFactura(long id, FacturaDTO facturaDTO) throws FacturaNotFoundException,
+            RecambioNotFoundException, ClienteNotFoundException, MotoNotFoundException, OrdenNotFoundException;
+
+    Factura modifyFacturaPagada(long id, boolean pagada) throws FacturaNotFoundException;
+
+    List<Factura> findByCliente(Cliente cliente) throws FacturaNotFoundException;
 }

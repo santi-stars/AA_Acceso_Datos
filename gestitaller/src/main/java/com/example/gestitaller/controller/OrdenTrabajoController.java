@@ -1,8 +1,9 @@
 package com.example.gestitaller.controller;
 
+import com.example.gestitaller.domain.Factura;
 import com.example.gestitaller.domain.OrdenTrabajo;
-import com.example.gestitaller.exception.ErrorResponse;
-import com.example.gestitaller.exception.OrdenNotFoundException;
+import com.example.gestitaller.domain.dto.OrdenTrabajoDTO;
+import com.example.gestitaller.exception.*;
 import com.example.gestitaller.service.OrdenTrabajoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,23 +55,33 @@ public class OrdenTrabajoController {
     }
 
     @PostMapping("/orden")
-    public OrdenTrabajo addOrden(@RequestBody OrdenTrabajo orden) {
+    public OrdenTrabajo addOrden(@RequestBody OrdenTrabajoDTO newOrdenTrabajoDTO) throws
+            MecanicoNotFoundException, MotoNotFoundException, FacturaNotFoundException {
         logger.info("Inicio addOrden");
-        OrdenTrabajo newOrden = ordenTrabajoService.addOrden(orden);
+        OrdenTrabajo newOrden = ordenTrabajoService.addOrden(newOrdenTrabajoDTO);
         logger.info("Fin addOrden");
         return newOrden;
     }
 
     @PutMapping("/orden/{id}")
-    public OrdenTrabajo modifyOrden(@RequestBody OrdenTrabajo orden, @PathVariable long id) throws OrdenNotFoundException {
+    public OrdenTrabajo modifyOrden(@RequestBody OrdenTrabajoDTO ordenTrabajoDTO, @PathVariable long id) throws OrdenNotFoundException,
+            MecanicoNotFoundException, MotoNotFoundException, FacturaNotFoundException {
         logger.info("Inicio modifyOrden " + id);
-        OrdenTrabajo newOrden = ordenTrabajoService.modifyOrden(id, orden);
+        OrdenTrabajo newOrden = ordenTrabajoService.modifyOrden(id, ordenTrabajoDTO);
         logger.info("Fin modifyOrden " + id);
         return newOrden;
     }
 
+    @PatchMapping("/orden/{id}")
+    public OrdenTrabajo modifyOrdenEjecutada(@PathVariable long id, @RequestBody boolean ejecutada) throws OrdenNotFoundException {
+        logger.info("Inicio modifyOrdenEjecutada " + id + " a " + ejecutada);
+        OrdenTrabajo orden = ordenTrabajoService.modifyOrdenEjecutada(id, ejecutada);
+        logger.info("Fin modifyOrdenEjecutada " + id + " a " + ejecutada);
+        return orden;
+    }
+
     @ExceptionHandler(OrdenNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleBikeNotFoundException(OrdenNotFoundException onfe) {
+    public ResponseEntity<ErrorResponse> handleOrdenNotFoundException(OrdenNotFoundException onfe) {
         ErrorResponse errorResponse = new ErrorResponse("404", onfe.getMessage());
         logger.info(onfe.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);

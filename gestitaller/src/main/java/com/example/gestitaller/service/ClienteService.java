@@ -20,4 +20,6 @@ public interface ClienteService {
     Cliente addCliente(Cliente cliente);
 
     Cliente modifyCliente(long id, Cliente cliente) throws ClienteNotFoundException;
+
+    Cliente modifyNombreCliente(long id, String nombre) throws ClienteNotFoundException;
 }

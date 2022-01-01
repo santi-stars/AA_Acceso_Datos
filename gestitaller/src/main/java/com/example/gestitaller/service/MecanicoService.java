@@ -18,4 +18,6 @@ public interface MecanicoService {
     Mecanico addMecanico(Mecanico mecanico);
 
     Mecanico modifyMecanico(long id, Mecanico mecanico) throws MecanicoNotFoundException;
+
+    Mecanico modifyFacturaPagada(long id, boolean disponible) throws MecanicoNotFoundException;
 }

@@ -1,10 +1,12 @@
 package com.example.gestitaller.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -27,5 +29,11 @@ public class Cliente {
     public String direccion;
     @Column(name = "cliente_vip")
     public boolean clienteVip;
+    @OneToMany(mappedBy = "cliente")
+    @JsonBackReference(value = "cliente-moto")
+    private List <Moto> motos;
+    @OneToMany(mappedBy = "cliente")
+    @JsonBackReference(value = "cliente-factura")
+    private List <Factura> facturas;
 
 }

@@ -1,6 +1,8 @@
 package com.example.gestitaller.controller;
 
+import com.example.gestitaller.domain.Cliente;
 import com.example.gestitaller.domain.Recambio;
+import com.example.gestitaller.exception.ClienteNotFoundException;
 import com.example.gestitaller.exception.ErrorResponse;
 import com.example.gestitaller.exception.RecambioNotFoundException;
 import com.example.gestitaller.service.RecambioService;
@@ -69,8 +71,16 @@ public class RecambioController {
         return newRecambio;
     }
 
+    @PatchMapping("/recambio/{id}")
+    public Recambio modifyDescripcionRecambio(@PathVariable long id, @RequestBody String descripcion) throws RecambioNotFoundException {
+        logger.info("Inicio modifyDescripcionRecambio " + id + " a " + descripcion);
+        Recambio recambio = recambioService.modifyDescripcionRecambio(id, descripcion);
+        logger.info("Fin modifyDescripcionRecambio " + id + " a " + descripcion);
+        return recambio;
+    }
+
     @ExceptionHandler(RecambioNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleBikeNotFoundException(RecambioNotFoundException rnfe) {
+    public ResponseEntity<ErrorResponse> handleRecambioNotFoundException(RecambioNotFoundException rnfe) {
         ErrorResponse errorResponse = new ErrorResponse("404", rnfe.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }

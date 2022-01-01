@@ -1027,3 +1027,19 @@ INSERT INTO "PUBLIC"."moto"("id","cilindrada","fecha_matriculacion","id_cliente"
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "cliente""factura" no encontrada
 Table "cliente""factura" not found; SQL statement:
 SELECT * FROM "cliente""factura" [42102-200]
+2021-12-31 21:12:14 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'' (factura: ""id_cliente"" BIGINT)"
+Data conversion error converting "'' (factura: ""id_cliente"" BIGINT)"; SQL statement:
+INSERT INTO "PUBLIC"."factura"("id","cantidad","fecha_factura","id_cliente","id_moto","id_recambio","pagada","id_orden")VALUES(?,?,?,?,?,?,?,?) [22018-200]
+2021-12-31 21:12:14 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'' (factura: ""id_cliente"" BIGINT)"
+Data conversion error converting "'' (factura: ""id_cliente"" BIGINT)"; SQL statement:
+INSERT INTO "PUBLIC"."factura"("id","cantidad","fecha_factura","id_cliente","id_moto","id_recambio","pagada","id_orden")VALUES(?,?,?,?,?,?,?,?) [22018-200]
+2021-12-31 21:32:35 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'' (factura: ""id_orden"" BIGINT)"
+Data conversion error converting "'' (factura: ""id_orden"" BIGINT)"; SQL statement:
+UPDATE "PUBLIC"."factura" SET "id"=? ,"cantidad"=? ,"fecha_factura"=? ,"id_cliente"=? ,"id_moto"=? ,"id_recambio"=? ,"pagada"=? ,"id_orden"=?  WHERE "id"=? [22018-200]
+2021-12-31 21:32:35 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'' (factura: ""id_orden"" BIGINT)"
+Data conversion error converting "'' (factura: ""id_orden"" BIGINT)"; SQL statement:
+UPDATE "PUBLIC"."factura" SET "id"=? ,"cantidad"=? ,"fecha_factura"=? ,"id_cliente"=? ,"id_moto"=? ,"id_recambio"=? ,"pagada"=? ,"id_orden"=?  WHERE "id"=? [22018-200]

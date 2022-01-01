@@ -48,9 +48,15 @@ public class MotoServiceImpl implements MotoService {
         moto.setModelo(newMoto.getModelo());
         moto.setCilindrada(newMoto.getCilindrada());
         moto.setFechaMatriculacion(newMoto.getFechaMatriculacion());
-        moto.setIdCliente(newMoto.getIdCliente());
+        moto.setCliente(newMoto.getCliente());
 
         return motoRepository.save(moto);
     }
 
+    @Override
+    public Moto modifyMarcaMoto(long id, String marca) throws MotoNotFoundException {
+        Moto moto = motoRepository.findById(id).orElseThrow(MotoNotFoundException::new);
+        moto.setMarca(marca);
+        return motoRepository.save(moto);
+    }
 }

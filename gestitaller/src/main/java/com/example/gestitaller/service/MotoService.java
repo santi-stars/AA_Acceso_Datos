@@ -18,4 +18,6 @@ public interface MotoService {
     Moto addMoto(Moto moto);
 
     Moto modifyMoto(long id, Moto moto) throws MotoNotFoundException;
+
+    Moto modifyMarcaMoto(long id, String marca) throws MotoNotFoundException;
 }

@@ -18,4 +18,6 @@ public interface RecambioService {
     Recambio addRecambio(Recambio recambio);
 
     Recambio modifyRecambio(long id, Recambio recambio) throws RecambioNotFoundException;
+
+    Recambio modifyDescripcionRecambio(long id, String descripcion) throws RecambioNotFoundException;
 }

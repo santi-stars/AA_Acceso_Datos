@@ -1,8 +1,10 @@
 package com.example.gestitaller.service;
 
-import com.example.gestitaller.domain.Factura;
-import com.example.gestitaller.exception.FacturaNotFoundException;
-import com.example.gestitaller.repository.FacturaRepository;
+import com.example.gestitaller.domain.*;
+import com.example.gestitaller.domain.dto.FacturaDTO;
+import com.example.gestitaller.exception.*;
+import com.example.gestitaller.repository.*;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,14 @@ public class FacturaServiceImpl implements FacturaService {
 
     @Autowired
     private FacturaRepository facturaRepository;
+    @Autowired
+    private RecambioRepository recambioRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
+    @Autowired
+    private MotoRepository motoRepository;
+    @Autowired
+    private OrdenTrabajoRepository ordenTrabajoRepository;
 
     @Override
     public List<Factura> findAll() {
@@ -37,21 +47,72 @@ public class FacturaServiceImpl implements FacturaService {
     }
 
     @Override
-    public Factura addFactura(Factura factura) {
+    public Factura addFactura(FacturaDTO newFacturaDTO) throws
+            RecambioNotFoundException, ClienteNotFoundException, MotoNotFoundException, OrdenNotFoundException {
+
+        Recambio recambio = recambioRepository.findById(newFacturaDTO.getRecambio())
+                .orElseThrow(RecambioNotFoundException::new);
+
+        Cliente cliente = clienteRepository.findById(newFacturaDTO.getCliente())
+                .orElseThrow(ClienteNotFoundException::new);
+
+        Moto moto = motoRepository.findById(newFacturaDTO.getMoto())
+                .orElseThrow(MotoNotFoundException::new);
+
+        OrdenTrabajo ordenTrabajo= ordenTrabajoRepository.findById(newFacturaDTO.getOrdenTrabajo())
+                .orElseThrow(OrdenNotFoundException::new);
+
+        ModelMapper mapper = new ModelMapper();
+        Factura factura = mapper.map(newFacturaDTO, Factura.class);
+        factura.setRecambio(recambio);
+        factura.setCliente(cliente);
+        factura.setMoto(moto);
+        factura.setOrdenTrabajo(ordenTrabajo);
+
         return facturaRepository.save(factura);
     }
 
     @Override
-    public Factura modifyFactura(long id, Factura newFactura) throws FacturaNotFoundException {
-        Factura factura = facturaRepository.findById(id).orElseThrow(FacturaNotFoundException::new);
-        factura.setFechaFactura(newFactura.getFechaFactura());
-        factura.setIdRecambio(newFactura.getIdRecambio());
-        factura.setCantidad(newFactura.getCantidad());
-        factura.setPagada(newFactura.isPagada());
-        factura.setIdCliente(newFactura.getIdCliente());
-        factura.setIdMoto(newFactura.getIdMoto());
+    public Factura modifyFactura(long id, FacturaDTO newFacturaDTO) throws FacturaNotFoundException,
+            RecambioNotFoundException, ClienteNotFoundException, MotoNotFoundException, OrdenNotFoundException {
+
+        Factura factura = facturaRepository.findById(id)
+                .orElseThrow(FacturaNotFoundException::new);
+
+        Recambio recambio = recambioRepository.findById(newFacturaDTO.getRecambio())
+                .orElseThrow(RecambioNotFoundException::new);
+
+        Cliente cliente = clienteRepository.findById(newFacturaDTO.getCliente())
+                        .orElseThrow(ClienteNotFoundException::new);
+
+        Moto moto = motoRepository.findById(newFacturaDTO.getMoto())
+                        .orElseThrow(MotoNotFoundException::new);
+
+        OrdenTrabajo ordenTrabajo= ordenTrabajoRepository.findById(newFacturaDTO.getOrdenTrabajo())
+                .orElseThrow(OrdenNotFoundException::new);
+
+        ModelMapper mapper = new ModelMapper();
+        factura = mapper.map(newFacturaDTO, Factura.class);
+        factura.setId(id);
+        factura.setRecambio(recambio);
+        factura.setCliente(cliente);
+        factura.setMoto(moto);
+        factura.setOrdenTrabajo(ordenTrabajo);
 
         return facturaRepository.save(factura);
     }
 
+    @Override
+    public List<Factura> findByCliente(Cliente cliente) throws FacturaNotFoundException {
+        List<Factura> facturas = facturaRepository.findByCliente(cliente);
+        return facturas;
+    }
+
+    @Override
+    public Factura modifyFacturaPagada(long id, boolean pagada) throws FacturaNotFoundException {
+        Factura factura = facturaRepository.findById(id)
+                .orElseThrow(FacturaNotFoundException::new);
+        factura.setPagada(pagada);
+        return facturaRepository.save(factura);
+    }
 }

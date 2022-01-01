@@ -1,7 +1,9 @@
 package com.example.gestitaller.controller;
 
+import com.example.gestitaller.domain.Mecanico;
 import com.example.gestitaller.domain.Moto;
 import com.example.gestitaller.exception.ErrorResponse;
+import com.example.gestitaller.exception.MecanicoNotFoundException;
 import com.example.gestitaller.exception.MotoNotFoundException;
 import com.example.gestitaller.service.MotoService;
 import org.slf4j.Logger;
@@ -69,8 +71,16 @@ public class MotoController {
         return newMoto;
     }
 
+    @PatchMapping("/moto/{id}")
+    public Moto modifyMarcaMoto(@PathVariable long id, @RequestBody String marca) throws MotoNotFoundException {
+        logger.info("Inicio modifyMarcaMoto " + id + " a " + marca);
+        Moto moto = motoService.modifyMarcaMoto(id, marca);
+        logger.info("Fin modifyMarcaMoto " + id + " a " + marca);
+        return moto;
+    }
+
     @ExceptionHandler(MotoNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleBikeNotFoundException(MotoNotFoundException mnfe) {
+    public ResponseEntity<ErrorResponse> handleMotoNotFoundException(MotoNotFoundException mnfe) {
         ErrorResponse errorResponse = new ErrorResponse("404", mnfe.getMessage());
         logger.info(mnfe.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);

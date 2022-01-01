@@ -1,16 +1,21 @@
 package com.example.gestitaller.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "orden_trabajo")
+@Table(name = "orden_trabajo")
 public class OrdenTrabajo {
 
     @Id
@@ -20,11 +25,13 @@ public class OrdenTrabajo {
     public boolean ejecutada;
     @Column(name = "fecha_orden")
     public LocalDate fechaOrden;
-    @Column(name = "id_mecanico")
-    public long idMecanico;
-    @Column(name = "id_factura")
-    public long idFactura;
-    @Column(name = "id_moto")
-    public long idMoto;
-
+    @ManyToOne
+    @JoinColumn(name = "id_moto")
+    public Moto moto;
+    @ManyToOne
+    @JoinColumn(name = "id_mecanico")
+    public Mecanico mecanico;
+    @OneToMany(mappedBy = "recambio")
+    @JsonBackReference(value = "orden_trabajo-factura")
+    private List<Factura> facturas;
 }

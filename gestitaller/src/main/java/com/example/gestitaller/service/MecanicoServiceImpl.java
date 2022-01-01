@@ -53,4 +53,11 @@ public class MecanicoServiceImpl implements MecanicoService {
 
         return mecanicoRepository.save(mecanico);
     }
+
+    @Override
+    public Mecanico modifyFacturaPagada(long id, boolean disponible) throws MecanicoNotFoundException {
+        Mecanico mecanico = mecanicoRepository.findById(id).orElseThrow(MecanicoNotFoundException::new);
+        mecanico.setDisponible(disponible);
+        return mecanicoRepository.save(mecanico);
+    }
 }

@@ -1,8 +1,8 @@
 package com.example.gestitaller.controller;
 
 import com.example.gestitaller.domain.Factura;
-import com.example.gestitaller.exception.ErrorResponse;
-import com.example.gestitaller.exception.FacturaNotFoundException;
+import com.example.gestitaller.domain.dto.FacturaDTO;
+import com.example.gestitaller.exception.*;
 import com.example.gestitaller.service.FacturaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,23 +54,33 @@ public class FacturaController {
     }
 
     @PostMapping("/factura")
-    public Factura addFactura(@RequestBody Factura factura) throws FacturaNotFoundException {
+    public Factura addFactura(@RequestBody FacturaDTO facturaDTO) throws
+            RecambioNotFoundException, ClienteNotFoundException, MotoNotFoundException, OrdenNotFoundException {
         logger.info("Inicio addFactura");
-        Factura newfactura = facturaService.addFactura(factura);
+        Factura newfactura = facturaService.addFactura(facturaDTO);
         logger.info("Fin addFactura");
         return newfactura;
     }
 
     @PutMapping("/factura/{id}")
-    public Factura modifyFactura(@RequestBody Factura factura, @PathVariable long id) throws FacturaNotFoundException {
+    public Factura modifyFactura(@RequestBody FacturaDTO facturaDTO, @PathVariable long id) throws
+            FacturaNotFoundException, RecambioNotFoundException, ClienteNotFoundException, MotoNotFoundException, OrdenNotFoundException {
         logger.info("Inicio modifyFactura " + id);
-        Factura newfactura = facturaService.modifyFactura(id, factura);
+        Factura newfactura = facturaService.modifyFactura(id, facturaDTO);
         logger.info("Fin modifyFactura " + id);
         return newfactura;
     }
 
+    @PatchMapping("/factura/{id}")
+    public Factura modifyFacturaPagada(@PathVariable long id, @RequestBody boolean pagada) throws FacturaNotFoundException {
+        logger.info("Inicio modifyFacturaPagada " + id + " a " + pagada);
+        Factura factura = facturaService.modifyFacturaPagada(id, pagada);
+        logger.info("Fin modifyFacturaPagada " + id + " a " + pagada);
+        return factura;
+    }
+
     @ExceptionHandler(FacturaNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleBikeNotFoundException(FacturaNotFoundException fnfe) {
+    public ResponseEntity<ErrorResponse> handleFacturaNotFoundException(FacturaNotFoundException fnfe) {
         ErrorResponse errorResponse = new ErrorResponse("404", fnfe.getMessage());
         logger.info(fnfe.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);

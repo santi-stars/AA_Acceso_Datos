@@ -53,4 +53,11 @@ public class RecambioServiceImpl implements RecambioService {
         return recambioRepository.save(recambio);
     }
 
+    @Override
+    public Recambio modifyDescripcionRecambio(long id, String descripcion) throws RecambioNotFoundException {
+        Recambio recambio = recambioRepository.findById(id).orElseThrow(RecambioNotFoundException::new);
+        recambio.setDescripcion(descripcion);
+        return recambioRepository.save(recambio);
+    }
+
 }

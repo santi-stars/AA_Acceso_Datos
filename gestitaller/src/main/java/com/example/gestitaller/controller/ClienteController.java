@@ -1,9 +1,12 @@
 package com.example.gestitaller.controller;
 
 import com.example.gestitaller.domain.Cliente;
+import com.example.gestitaller.domain.Factura;
 import com.example.gestitaller.exception.ClienteNotFoundException;
 import com.example.gestitaller.exception.ErrorResponse;
+import com.example.gestitaller.exception.FacturaNotFoundException;
 import com.example.gestitaller.service.ClienteService;
+import com.example.gestitaller.service.FacturaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,8 @@ public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
+    @Autowired
+    private FacturaService facturaService;
 
     private final Logger logger = LoggerFactory.getLogger(ClienteController.class);
 
@@ -49,9 +54,9 @@ public class ClienteController {
 
     @GetMapping("/clientes/{nombre}")
     public List<Cliente> getByNombre(@PathVariable String nombre) throws ClienteNotFoundException {
-        logger.info("Inicio addCliente " + nombre);
+        logger.info("Inicio getByNombre " + nombre);
         List<Cliente> clientes = clienteService.findByNombre(nombre);
-        logger.info("Fin addCliente " + nombre);
+        logger.info("Fin getByNombre " + nombre);
         return clientes;
     }
 
@@ -79,8 +84,24 @@ public class ClienteController {
         return newCliente;
     }
 
+    @PatchMapping("/cliente/{id}")
+    public Cliente modifyNombreCliente(@PathVariable long id, @RequestBody String nombre) throws ClienteNotFoundException {
+        logger.info("Inicio modifyEdadCliente " + id + " a nombre " + nombre);
+        Cliente cliente = clienteService.modifyNombreCliente(id, nombre);
+        logger.info("Fin modifyEdadCliente " + id + " a nombre " + nombre);
+        return cliente;
+    }
+
+    @GetMapping("/cliente/{id}/facturas")
+    public List<Factura> getFacturasPorCliente(@PathVariable long id) throws ClienteNotFoundException, FacturaNotFoundException {
+        Cliente cliente = clienteService.findById(id);
+        List<Factura> facturas = facturaService.findByCliente(cliente);
+
+        return facturas;
+    }
+
     @ExceptionHandler(ClienteNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleBikeNotFoundException(ClienteNotFoundException cnfe) {
+    public ResponseEntity<ErrorResponse> handleClienteNotFoundException(ClienteNotFoundException cnfe) {
         ErrorResponse errorResponse = new ErrorResponse("404", cnfe.getMessage());
         logger.info(cnfe.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
