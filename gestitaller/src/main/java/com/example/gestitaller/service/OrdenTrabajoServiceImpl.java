@@ -1,15 +1,12 @@
 package com.example.gestitaller.service;
 
-import com.example.gestitaller.domain.Factura;
 import com.example.gestitaller.domain.Mecanico;
 import com.example.gestitaller.domain.Moto;
 import com.example.gestitaller.domain.OrdenTrabajo;
 import com.example.gestitaller.domain.dto.OrdenTrabajoDTO;
-import com.example.gestitaller.exception.FacturaNotFoundException;
 import com.example.gestitaller.exception.MecanicoNotFoundException;
 import com.example.gestitaller.exception.MotoNotFoundException;
 import com.example.gestitaller.exception.OrdenNotFoundException;
-import com.example.gestitaller.repository.FacturaRepository;
 import com.example.gestitaller.repository.MecanicoRepository;
 import com.example.gestitaller.repository.MotoRepository;
 import com.example.gestitaller.repository.OrdenTrabajoRepository;
@@ -22,8 +19,6 @@ import java.util.List;
 @Service
 public class OrdenTrabajoServiceImpl implements OrdenTrabajoService {
 
-    @Autowired
-    private FacturaRepository facturaRepository;
     @Autowired
     private OrdenTrabajoRepository ordenTrabajoRepository;
     @Autowired

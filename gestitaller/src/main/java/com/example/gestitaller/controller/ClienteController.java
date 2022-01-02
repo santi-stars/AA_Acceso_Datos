@@ -2,9 +2,11 @@ package com.example.gestitaller.controller;
 
 import com.example.gestitaller.domain.Cliente;
 import com.example.gestitaller.domain.Factura;
+import com.example.gestitaller.domain.dto.FacturaDTO;
 import com.example.gestitaller.exception.ClienteNotFoundException;
 import com.example.gestitaller.exception.ErrorResponse;
 import com.example.gestitaller.exception.FacturaNotFoundException;
+import com.example.gestitaller.exception.MotoNotFoundException;
 import com.example.gestitaller.service.ClienteService;
 import com.example.gestitaller.service.FacturaService;
 import org.slf4j.Logger;
@@ -26,6 +28,7 @@ public class ClienteController {
 
     private final Logger logger = LoggerFactory.getLogger(ClienteController.class);
 
+    // FILTRADO por 3 campos
     @GetMapping("/clientes")
     public List<Cliente> getClientes(@RequestParam(name = "nombre", required = false) String nombre,
                                      @RequestParam(name = "apellido", required = false) String apellido,
@@ -98,6 +101,24 @@ public class ClienteController {
         List<Factura> facturas = facturaService.findByCliente(cliente);
 
         return facturas;
+    }
+
+    // JPQL y DTO
+    @GetMapping("/cliente/moto/facturas")
+    public List<Factura> findByClienteAndMoto(@RequestBody FacturaDTO facturaDTO) throws
+            ClienteNotFoundException, MotoNotFoundException {
+        logger.info("Inicio findByClienteAndMoto");
+        List<Factura> facturas = facturaService.findByClienteAndMoto(facturaDTO);
+        logger.info("Fin findByClienteAndMoto");
+        return facturas;
+    }
+
+    // JPQL y DTO
+    @DeleteMapping("moto/facturas")
+    public void deleteByMoto(@RequestBody FacturaDTO facturaDTO) throws MotoNotFoundException {
+        logger.info("Inicio deleteByMoto");
+        facturaService.deleteByMoto(facturaDTO);
+        logger.info("Fin deleteByMoto");
     }
 
     @ExceptionHandler(ClienteNotFoundException.class)

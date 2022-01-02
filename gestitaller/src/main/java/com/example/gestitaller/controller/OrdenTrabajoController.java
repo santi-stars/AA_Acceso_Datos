@@ -1,6 +1,5 @@
 package com.example.gestitaller.controller;
 
-import com.example.gestitaller.domain.Factura;
 import com.example.gestitaller.domain.OrdenTrabajo;
 import com.example.gestitaller.domain.dto.OrdenTrabajoDTO;
 import com.example.gestitaller.exception.*;
@@ -54,6 +53,7 @@ public class OrdenTrabajoController {
         return orden;
     }
 
+    // DTO
     @PostMapping("/orden")
     public OrdenTrabajo addOrden(@RequestBody OrdenTrabajoDTO newOrdenTrabajoDTO) throws
             MecanicoNotFoundException, MotoNotFoundException, FacturaNotFoundException {
@@ -63,6 +63,7 @@ public class OrdenTrabajoController {
         return newOrden;
     }
 
+    // DTO
     @PutMapping("/orden/{id}")
     public OrdenTrabajo modifyOrden(@RequestBody OrdenTrabajoDTO ordenTrabajoDTO, @PathVariable long id) throws OrdenNotFoundException,
             MecanicoNotFoundException, MotoNotFoundException, FacturaNotFoundException {

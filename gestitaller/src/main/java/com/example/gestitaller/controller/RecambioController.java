@@ -1,8 +1,6 @@
 package com.example.gestitaller.controller;
 
-import com.example.gestitaller.domain.Cliente;
 import com.example.gestitaller.domain.Recambio;
-import com.example.gestitaller.exception.ClienteNotFoundException;
 import com.example.gestitaller.exception.ErrorResponse;
 import com.example.gestitaller.exception.RecambioNotFoundException;
 import com.example.gestitaller.service.RecambioService;

@@ -3,7 +3,6 @@ package com.example.gestitaller.domain.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import java.time.LocalDate;
 
 @Data

@@ -1,9 +1,7 @@
 package com.example.gestitaller.controller;
 
-import com.example.gestitaller.domain.Mecanico;
 import com.example.gestitaller.domain.Moto;
 import com.example.gestitaller.exception.ErrorResponse;
-import com.example.gestitaller.exception.MecanicoNotFoundException;
 import com.example.gestitaller.exception.MotoNotFoundException;
 import com.example.gestitaller.service.MotoService;
 import org.slf4j.Logger;

@@ -59,7 +59,7 @@ public class FacturaServiceImpl implements FacturaService {
         Moto moto = motoRepository.findById(newFacturaDTO.getMoto())
                 .orElseThrow(MotoNotFoundException::new);
 
-        OrdenTrabajo ordenTrabajo= ordenTrabajoRepository.findById(newFacturaDTO.getOrdenTrabajo())
+        OrdenTrabajo ordenTrabajo = ordenTrabajoRepository.findById(newFacturaDTO.getOrdenTrabajo())
                 .orElseThrow(OrdenNotFoundException::new);
 
         ModelMapper mapper = new ModelMapper();
@@ -73,26 +73,23 @@ public class FacturaServiceImpl implements FacturaService {
     }
 
     @Override
-    public Factura modifyFactura(long id, FacturaDTO newFacturaDTO) throws FacturaNotFoundException,
+    public Factura modifyFactura(long id, FacturaDTO newFacturaDTO) throws
             RecambioNotFoundException, ClienteNotFoundException, MotoNotFoundException, OrdenNotFoundException {
-
-        Factura factura = facturaRepository.findById(id)
-                .orElseThrow(FacturaNotFoundException::new);
 
         Recambio recambio = recambioRepository.findById(newFacturaDTO.getRecambio())
                 .orElseThrow(RecambioNotFoundException::new);
 
         Cliente cliente = clienteRepository.findById(newFacturaDTO.getCliente())
-                        .orElseThrow(ClienteNotFoundException::new);
+                .orElseThrow(ClienteNotFoundException::new);
 
         Moto moto = motoRepository.findById(newFacturaDTO.getMoto())
-                        .orElseThrow(MotoNotFoundException::new);
+                .orElseThrow(MotoNotFoundException::new);
 
-        OrdenTrabajo ordenTrabajo= ordenTrabajoRepository.findById(newFacturaDTO.getOrdenTrabajo())
+        OrdenTrabajo ordenTrabajo = ordenTrabajoRepository.findById(newFacturaDTO.getOrdenTrabajo())
                 .orElseThrow(OrdenNotFoundException::new);
 
         ModelMapper mapper = new ModelMapper();
-        factura = mapper.map(newFacturaDTO, Factura.class);
+        Factura factura = mapper.map(newFacturaDTO, Factura.class);
         factura.setId(id);
         factura.setRecambio(recambio);
         factura.setCliente(cliente);
@@ -106,6 +103,27 @@ public class FacturaServiceImpl implements FacturaService {
     public List<Factura> findByCliente(Cliente cliente) throws FacturaNotFoundException {
         List<Factura> facturas = facturaRepository.findByCliente(cliente);
         return facturas;
+    }
+
+    @Override
+    public List<Factura> findByClienteAndMoto(FacturaDTO facturaDTO) throws ClienteNotFoundException, MotoNotFoundException {
+
+        Cliente cliente = clienteRepository.findById(facturaDTO.getCliente())
+                .orElseThrow(ClienteNotFoundException::new);
+
+        Moto moto = motoRepository.findById(facturaDTO.getMoto())
+                .orElseThrow(MotoNotFoundException::new);
+
+        return facturaRepository.findByClienteAndMoto(cliente, moto);
+    }
+
+    @Override
+    public void deleteByMoto(FacturaDTO facturaDTO) throws MotoNotFoundException {
+
+        Moto moto = motoRepository.findById(facturaDTO.getMoto())
+                .orElseThrow(MotoNotFoundException::new);
+
+        facturaRepository.deleteByMoto(moto);
     }
 
     @Override

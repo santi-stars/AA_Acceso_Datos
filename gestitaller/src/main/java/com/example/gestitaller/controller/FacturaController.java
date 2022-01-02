@@ -53,6 +53,7 @@ public class FacturaController {
         return factura;
     }
 
+    // DTO
     @PostMapping("/factura")
     public Factura addFactura(@RequestBody FacturaDTO facturaDTO) throws
             RecambioNotFoundException, ClienteNotFoundException, MotoNotFoundException, OrdenNotFoundException {
@@ -62,6 +63,7 @@ public class FacturaController {
         return newfactura;
     }
 
+    // DTO
     @PutMapping("/factura/{id}")
     public Factura modifyFactura(@RequestBody FacturaDTO facturaDTO, @PathVariable long id) throws
             FacturaNotFoundException, RecambioNotFoundException, ClienteNotFoundException, MotoNotFoundException, OrdenNotFoundException {

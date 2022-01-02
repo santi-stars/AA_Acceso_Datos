@@ -1,7 +1,9 @@
 package com.example.gestitaller.repository;
 
 import com.example.gestitaller.domain.Cliente;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,7 +12,9 @@ import java.util.List;
 public interface ClienteRepository extends CrudRepository<Cliente, Long> {
     List<Cliente> findAll();
 
-    List<Cliente> findByNombre(String nombre);
+    // JPQL
+    @Query("SELECT c FROM cliente c WHERE nombre = :nombre")
+    List<Cliente> findByNombre(@Param("nombre") String nombre);
 
     List<Cliente> findByNombreOrApellidoOrDni(String nombre, String apellido, String dni);
 }

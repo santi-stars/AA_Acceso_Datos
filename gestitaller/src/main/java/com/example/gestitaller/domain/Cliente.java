@@ -31,9 +31,9 @@ public class Cliente {
     public boolean clienteVip;
     @OneToMany(mappedBy = "cliente")
     @JsonBackReference(value = "cliente-moto")
-    private List <Moto> motos;
+    private List<Moto> motos;
     @OneToMany(mappedBy = "cliente")
     @JsonBackReference(value = "cliente-factura")
-    private List <Factura> facturas;
+    private List<Factura> facturas;
 
 }

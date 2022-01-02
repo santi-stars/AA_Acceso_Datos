@@ -26,4 +26,8 @@ public interface FacturaService {
     Factura modifyFacturaPagada(long id, boolean pagada) throws FacturaNotFoundException;
 
     List<Factura> findByCliente(Cliente cliente) throws FacturaNotFoundException;
+
+    List<Factura> findByClienteAndMoto(FacturaDTO facturaDTO) throws ClienteNotFoundException, MotoNotFoundException;
+
+    void deleteByMoto(FacturaDTO facturaDTO) throws MotoNotFoundException;
 }
